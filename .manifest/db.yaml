@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db
+spec:
+  selector:
+    matchLabels:
+      app: db # has to match .spec.template.metadata.labels
+  replicas: 2 # by default is 1
+  minReadySeconds: 10 # by default is 0
+  template:
+    metadata:
+      labels:
+        app: db # has to match .spec.selector.matchLabels
+    spec:
+      terminationGracePeriodSeconds: 9
+      containers:
+      - name: mysql-db
+        image: chaya01/my-sql
+        ports:
+        - containerPort: 3306
+          name: db-port

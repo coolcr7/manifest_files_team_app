@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-frontend-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-app-frontend
+  template:
+    metadata:
+      labels:
+        app: my-app-frontend
+    spec:
+      containers:
+      - name: frontend-container
+        image: chaya01/my_frontend_app:latest
+        ports:
+        - containerPort: 80
